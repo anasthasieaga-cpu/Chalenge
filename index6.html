@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra Benin — Connecter les agriculteurs au marché</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #0d3320;
+    --green-mid: #1a5c38;
+    --green-bright: #2d9b5a;
+    --green-light: #5dc98a;
+    --green-pale: #c8f0d8;
+    --gold: #e8c84a;
+    --gold-dark: #c4a32a;
+    --cream: #faf7f0;
+    --warm-white: #ffffff;
+    --text-dark: #0d1a12;
+    --text-mid: #3a5244;
+    --text-light: #7aaa8c;
+    --surface: #f4f9f6;
+    --border: rgba(13, 51, 32, 0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250, 247, 240, 0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    color: var(--green-deep);
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .nav-logo .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green-bright);
+    display: inline-block;
+  }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--green-bright); }
+
+  .nav-cta {
+    background: var(--green-deep);
+    color: white;
+    padding: 0.65rem 1.6rem;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(45, 155, 90, 0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(13, 51, 32, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Decorative circles */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border: 1px solid rgba(45, 155, 90, 0.12);
+    border-radius: 50%;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border: 1px solid rgba(45, 155, 90, 0.08);
+    border-radius: 50%;
+    right: 0; top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .hero-left { position: relative; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale);
+    color: var(--green-mid);
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .hero-badge .pulse {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green-bright);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    color: var(--green-deep);
+    margin-bottom: 1.6rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-title .accent {
+    color: var(--green-bright);
+    position: relative;
+  }
+
+  .hero-title .accent::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1rem; align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green-deep);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem; font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    border: none; cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--green-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(13, 51, 32, 0.2);
+  }
+
+  .btn-primary .arrow {
+    width: 20px; height: 20px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+  }
+
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+
+  .btn-secondary {
+    color: var(--text-mid);
+    font-size: 0.88rem;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 6px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--green-bright); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3.5rem;
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1.8rem;
+    color: var(--green-deep);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; color: var(--text-light);
+    margin-top: 4px; font-weight: 400;
+  }
+
+  /* Hero visual */
+  .hero-right { position: relative; }
+
+  .hero-visual {
+    position: relative;
+    background: var(--green-deep);
+    border-radius: 2rem;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem;
+  }
+
+  .hero-visual .bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 30% 20%, rgba(45,155,90,0.5) 0%, transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(93,201,138,0.3) 0%, transparent 45%);
+  }
+
+  .hero-visual .leaf-grid {
+    position: absolute; inset: 0;
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; opacity: 0.06;
+  }
+
+  .leaf-cell {
+    border: 1px solid rgba(255,255,255,0.8);
+    aspect-ratio: 1;
+  }
+
+  .hero-card {
+    position: relative; z-index: 2;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 1.2rem;
+    padding: 1.4rem;
+    color: white;
+  }
+
+  .hero-card-title {
+    font-size: 0.75rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.8rem;
+  }
+
+  .price-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.88rem;
+  }
+
+  .price-label { color: rgba(255,255,255,0.8); }
+  .price-val {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .price-bar-wrap {
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px; height: 4px; margin-top: 1rem;
+  }
+  .price-bar {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, var(--green-light), var(--gold));
+    animation: growbar 2s ease forwards;
+    width: 0;
+  }
+  @keyframes growbar { to { width: 72%; } }
+
+  .floating-badge {
+    position: absolute;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-size: 0.75rem; font-weight: 700;
+    padding: 0.5rem 1rem; border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    white-space: nowrap;
+  }
+
+  .fb-top { top: 2rem; right: -2rem; animation: float 4s ease-in-out infinite; }
+  .fb-mid { top: 40%; left: -2.5rem; animation: float 4s ease-in-out infinite 1s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ── SECTION COMMONS ── */
+  section { position: relative; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--green-bright);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.1;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+  }
+
+  /* ── FEATURES ── */
+  #features {
+    padding: 6rem 4rem;
+    background: var(--warm-white);
+  }
+
+  .features-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: end;
+    margin-bottom: 4rem;
+  }
+
+  .features-desc {
+    color: var(--text-mid);
+    font-size: 1rem; line-height: 1.7; font-weight: 300;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--warm-white);
+    padding: 2.4rem 2rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .feature-card:hover { background: var(--surface); }
+
+  .feature-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .feature-num {
+    position: absolute; top: 1.6rem; right: 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 3.5rem; font-weight: 800;
+    color: var(--border);
+    line-height: 1;
+  }
+
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1.05rem;
+    color: var(--green-deep);
+    margin-bottom: 0.7rem;
+  }
+
+  .feature-desc {
+    color: var(--text-mid);
+    font-size: 0.88rem; line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #how {
+    padding: 6rem 4rem;
+    background: var(--cream);
+  }
+
+  .how-header { text-align: center; margin-bottom: 4rem; }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .steps-line {
+    position: absolute;
+    top: 2rem; left: 12%; right: 12%;
+    height: 1px;
+    background: var(--border);
+    z-index: 0;
+  }
+
+  .step {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 0 1.5rem;
+    position: relative; z-index: 1;
+  }
+
+  .step-circle {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 0.9rem;
+    color: var(--green-deep);
+    margin-bottom: 1.4rem;
+    transition: all 0.2s;
+  }
+
+  .step:hover .step-circle {
+    background: var(--green-deep);
+    color: white;
+    border-color: var(--green-deep);
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--green-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-desc {
+    font-size: 0.82rem;
+    color: var(--text-mid); line-height: 1.6; font-weight: 300;
+  }
+
+  /* ── PROFILES ── */
+  #profiles {
+    padding: 6rem 4rem;
+    background: var(--green-deep);
+    color: white;
+  }
+
+  .profiles-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .profile-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.2rem;
+    padding: 1.8rem 1.5rem;
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .profile-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-4px);
+  }
+
+  .profile-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; margin-bottom: 1.2rem;
+  }
+
+  .profile-name {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 1rem; color: white; margin-bottom: 0.5rem;
+  }
+
+  .profile-desc {
+    font-size: 0.82rem; color: rgba(255,255,255,0.55);
+    line-height: 1.6; font-weight: 300;
+  }
+
+  .profile-tag {
+    display: inline-block; margin-top: 1rem;
+    background: rgba(255,255,255,0.1);
+    color: var(--gold);
+    font-size: 0.72rem; font-weight: 500;
+    padding: 0.3rem 0.8rem; border-radius: 50px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── FORM ── */
+  #inscription {
+    padding: 6rem 4rem;
+    background: var(--warm-white);
+  }
+
+  .form-container {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .form-left { }
+
+  .form-promise {
+    margin-top: 2.5rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .promise-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+
+  .promise-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green-pale);
+    color: var(--green-bright);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; flex-shrink: 0; margin-top: 1px;
+  }
+
+  .promise-text { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* Form right */
+  .form-right {
+    background: var(--surface);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+  }
+
+  .form-right h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1.2rem;
+    color: var(--green-deep); margin-bottom: 1.8rem;
+  }
+
+  .form-group { margin-bottom: 1.2rem; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem; font-weight: 500;
+    color: var(--text-mid); margin-bottom: 0.5rem;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--green-bright);
+    box-shadow: 0 0 0 3px rgba(45, 155, 90, 0.1);
+  }
+
+  .form-group input::placeholder { color: #b0c8bb; }
+
+  .role-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.6rem; margin-bottom: 1.2rem;
+  }
+
+  .role-option input[type="radio"] { display: none; }
+
+  .role-option label {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: none; letter-spacing: 0;
+  }
+
+  .role-option input:checked + label {
+    border-color: var(--green-bright);
+    background: rgba(45,155,90,0.06);
+    color: var(--green-deep);
+    font-weight: 500;
+  }
+
+  .role-option label .role-icon { font-size: 1rem; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--green-deep);
+    color: white;
+    border: none; cursor: pointer;
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 500;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: all 0.25s;
+    margin-top: 0.5rem;
+  }
+
+  .form-submit:hover {
+    background: var(--green-mid);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(13,51,32,0.2);
+  }
+
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    background: rgba(45,155,90,0.08);
+    border-radius: 1rem;
+    border: 1px solid rgba(45,155,90,0.2);
+    margin-top: 1rem;
+  }
+
+  .success-msg.show { display: block; }
+
+  .success-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--green-bright);
+    color: white;
+    font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .success-msg h4 {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    color: var(--green-deep); margin-bottom: 0.5rem;
+  }
+
+  .success-msg p { font-size: 0.85rem; color: var(--text-mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: white;
+  }
+
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none; font-size: 0.82rem;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: white; }
+
+  footer p { font-size: 0.8rem; }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-right { display: none; }
+    #features { padding: 4rem 1.5rem; }
+    .features-header { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    #how { padding: 4rem 1.5rem; }
+    .steps-container { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .steps-line { display: none; }
+    #profiles { padding: 4rem 1.5rem; }
+    .profiles-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .profiles-grid { grid-template-columns: 1fr 1fr; }
+    #inscription { padding: 4rem 1.5rem; }
+    .form-container { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="dot"></span>
+    Terra Benin
+  </div>
+  <ul class="nav-links">
+    <li><a href="#features">Fonctionnalités</a></li>
+    <li><a href="#how">Comment ça marche</a></li>
+    <li><a href="#profiles">Qui sommes-nous ?</a></li>
+  </ul>
+  <a href="#inscription" class="nav-cta">Rejoindre</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-left">
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      Plateforme agricole · Bénin 2026
+    </div>
+    <h1 class="hero-title">
+      L'agriculture<br>
+      <span class="accent">connectée</span><br>
+      au marché
+    </h1>
+    <p class="hero-sub">
+      Terra Benin simplifie la mise en relation entre producteurs, acheteurs et transporteurs pour réduire les pertes et augmenter les revenus agricoles.
+    </p>
+    <div class="hero-actions">
+      <a href="#inscription" class="btn-primary">
+        Créer un compte
+        <span class="arrow">→</span>
+      </a>
+      <a href="#how" class="btn-secondary">
+        Voir comment ça marche →
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3K+</div>
+        <div class="stat-label">Agriculteurs actifs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Départements couverts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">-40%</div>
+        <div class="stat-label">Pertes post-récolte</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="bg-pattern"></div>
+      <div class="leaf-grid">
+        <script>for(let i=0;i<25;i++) document.write('<div class="leaf-cell"></div>');</script>
+      </div>
+
+      <div class="floating-badge fb-top">🌾 Marché ouvert</div>
+      <div class="floating-badge fb-mid">📡 USSD + App</div>
+
+      <div class="hero-card">
+        <div class="hero-card-title">Prix du marché aujourd'hui</div>
+        <div class="price-row">
+          <span class="price-label">Maïs (kg)</span>
+          <span class="price-val">285 CFA</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Manioc (kg)</span>
+          <span class="price-val">120 CFA</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Tomate (caisse)</span>
+          <span class="price-val">8 400 CFA</span>
+        </div>
+        <div class="price-bar-wrap"><div class="price-bar"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="features-header fade-up">
+    <div>
+      <span class="section-tag">Fonctionnalités</span>
+      <h2 class="section-title">Tout ce dont vous<br>avez besoin</h2>
+    </div>
+    <p class="features-desc">
+      Une suite complète d'outils pensés pour les réalités du terrain béninois — du champ jusqu'à la vente finale.
+    </p>
+  </div>
+
+  <div class="features-grid fade-up">
+    <div class="feature-card">
+      <span class="feature-num">01</span>
+      <div class="feature-icon">📱</div>
+      <h3 class="feature-title">Accessible partout</h3>
+      <p class="feature-desc">Application mobile ET USSD (*123#) pour les zones sans connexion internet. Aucun agriculteur laissé de côté.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">02</span>
+      <div class="feature-icon">🔗</div>
+      <h3 class="feature-title">Marketplace directe</h3>
+      <p class="feature-desc">Connexion directe producteurs–acheteurs. Zéro intermédiaire, meilleur prix pour tout le monde.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">03</span>
+      <div class="feature-icon">🚚</div>
+      <h3 class="feature-title">Logistique intégrée</h3>
+      <p class="feature-desc">Réseau de transporteurs partenaires pour acheminer vos récoltes rapidement et réduire les pertes.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">04</span>
+      <div class="feature-icon">📊</div>
+      <h3 class="feature-title">Prix en temps réel</h3>
+      <p class="feature-desc">Accès aux cours du marché actualisés quotidiennement pour vendre au meilleur moment.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">05</span>
+      <div class="feature-icon">💰</div>
+      <h3 class="feature-title">Paiement sécurisé</h3>
+      <p class="feature-desc">Règlements via Mobile Money (MTN, Moov) avec traçabilité complète de chaque transaction.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">06</span>
+      <div class="feature-icon">🤝</div>
+      <h3 class="feature-title">Communauté agricole</h3>
+      <p class="feature-desc">Forum d'entraide, conseils agronomiques et partage d'expériences entre pairs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how-header fade-up">
+    <span class="section-tag">Processus</span>
+    <h2 class="section-title">Simple comme bonjour</h2>
+  </div>
+
+  <div class="steps-container fade-up">
+    <div class="steps-line"></div>
+    <div class="step">
+      <div class="step-circle">01</div>
+      <h4 class="step-title">Inscription</h4>
+      <p class="step-desc">Créez votre profil en quelques minutes via l'app ou le USSD</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">02</div>
+      <h4 class="step-title">Publiez votre offre</h4>
+      <p class="step-desc">Ajoutez vos produits disponibles avec quantité et localisation</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">03</div>
+      <h4 class="step-title">Connectez-vous</h4>
+      <p class="step-desc">Recevez des demandes d'acheteurs qualifiés près de chez vous</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">04</div>
+      <h4 class="step-title">Encaissez</h4>
+      <p class="step-desc">Transaction sécurisée et livraison organisée via notre réseau</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section id="profiles">
+  <div class="profiles-header fade-up">
+    <div>
+      <span class="section-tag" style="color: var(--gold);">Pour qui ?</span>
+      <h2 class="section-title" style="color: white;">Un écosystème<br>complet</h2>
+    </div>
+    <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; max-width: 300px; font-weight: 300; line-height: 1.7;">
+      Terra Benin réunit tous les acteurs de la chaîne agroalimentaire sur une seule plateforme.
+    </p>
+  </div>
+
+  <div class="profiles-grid fade-up">
+    <div class="profile-card">
+      <div class="profile-icon">🌾</div>
+      <div class="profile-name">Agriculteur</div>
+      <p class="profile-desc">Vendez directement votre production au meilleur prix sans passer par des revendeurs.</p>
+      <span class="profile-tag">Producteur</span>
+    </div>
+    <div class="profile-card">
+      <div class="profile-icon">🛒</div>
+      <div class="profile-name">Acheteur</div>
+      <p class="profile-desc">Accédez à une offre fraîche et locale, directement auprès des producteurs.</p>
+      <span class="profile-tag">Grossiste / Détaillant</span>
+    </div>
+    <div class="profile-card">
+      <div class="profile-icon">🚛</div>
+      <div class="profile-name">Transporteur</div>
+      <p class="profile-desc">Trouvez des missions régulières et optimisez vos trajets avec notre système de demandes.</p>
+      <span class="profile-tag">Logistique</span>
+    </div>
+    <div class="profile-card">
+      <div class="profile-icon">🏪</div>
+      <div class="profile-name">Fournisseur</div>
+      <p class="profile-desc">Proposez vos intrants, semences et équipements à une communauté d'agriculteurs actifs.</p>
+      <span class="profile-tag">Intrants & Services</span>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="inscription">
+  <div class="form-container">
+    <div class="form-left fade-up">
+      <span class="section-tag">Inscription</span>
+      <h2 class="section-title">Rejoignez<br>l'agriculture<br>de demain</h2>
+
+      <div class="form-promise">
+        <div class="promise-item">
+          <div class="promise-check">✓</div>
+          <p class="promise-text"><strong>Gratuit</strong> — Aucun frais d'inscription ni abonnement caché</p>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">✓</div>
+          <p class="promise-text"><strong>Rapide</strong> — Compte actif en moins de 5 minutes</p>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">✓</div>
+          <p class="promise-text"><strong>Accessible</strong> — Fonctionne sans smartphone via le code USSD</p>
+        </div>
+        <div class="promise-item">
+          <div class="promise-check">✓</div>
+          <p class="promise-text"><strong>Sécurisé</strong> — Vos données personnelles sont protégées</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-right fade-up">
+      <h3>Créer mon compte</h3>
+
+      <form id="signup-form">
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input type="text" placeholder="Ex : Kokou Agbodjan" required>
+        </div>
+        <div class="form-group">
+          <label>Numéro de téléphone</label>
+          <input type="tel" placeholder="+229 XX XX XX XX" required>
+        </div>
+        <div class="form-group">
+          <label>Ville / Région</label>
+          <input type="text" placeholder="Ex : Cotonou, Parakou…" required>
+        </div>
+
+        <div class="form-group">
+          <label style="margin-bottom: 0.8rem; display: block;">Vous êtes ?</label>
+          <div class="role-grid">
+            <div class="role-option">
+              <input type="radio" name="role" id="r-agri" value="agriculteur" required>
+              <label for="r-agri"><span class="role-icon">🌾</span> Agriculteur</label>
+            </div>
+            <div class="role-option">
+              <input type="radio" name="role" id="r-acheteur" value="acheteur">
+              <label for="r-acheteur"><span class="role-icon">🛒</span> Acheteur</label>
+            </div>
+            <div class="role-option">
+              <input type="radio" name="role" id="r-transport" value="transporteur">
+              <label for="r-transport"><span class="role-icon">🚛</span> Transporteur</label>
+            </div>
+            <div class="role-option">
+              <input type="radio" name="role" id="r-fournisseur" value="fournisseur">
+              <label for="r-fournisseur"><span class="role-icon">🏪</span> Fournisseur</label>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="form-submit">
+          S'inscrire gratuitement →
+        </button>
+      </form>
+
+      <div class="success-msg" id="success">
+        <div class="success-icon">✓</div>
+        <h4>Bienvenue sur Terra Benin !</h4>
+        <p>Votre inscription a bien été enregistrée. Nous vous contacterons très prochainement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Terra Benin</div>
+  <ul class="footer-links">
+    <li><a href="#">À propos</a></li>
+    <li><a href="#">Confidentialité</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <p>© 2026 Terra Benin — Tous droits réservés</p>
+</footer>
+
+<script>
+  const form = document.getElementById('signup-form');
+  const success = document.getElementById('success');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    form.style.display = 'none';
+    success.classList.add('show');
+  });
+
+  // Scroll reveal
+  const els = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((en, i) => {
+      if (en.isIntersecting) {
+        setTimeout(() => en.target.classList.add('visible'), i * 80);
+        obs.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  els.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
